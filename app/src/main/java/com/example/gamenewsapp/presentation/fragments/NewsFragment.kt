@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import com.example.gamenewsapp.base.BaseFragment
 import com.example.gamenewsapp.base.BaseViewModel
 import com.example.gamenewsapp.databinding.FragmentNewsBinding
+import com.example.gamenewsapp.presentation.adapters.NewsPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.android.ext.android.bind
 
-class NewsFragment(
+class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
 
-    override val viewModel: BaseViewModel,
-    override var binding: FragmentNewsBinding
+    override lateinit var viewModel: BaseViewModel
+    override lateinit var binding: FragmentNewsBinding
 
-) : BaseFragment<FragmentNewsBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,14 +25,26 @@ class NewsFragment(
     }
 
     override fun initViews() {
-        TODO("Not yet implemented")
+        binding.vpContainerNews
+        binding.tlNews
+
+        val adapter = NewsPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
+        binding.vpContainerNews.adapter = adapter
+
+        TabLayoutMediator(binding.tlNews, binding.vpContainerNews) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Stories"
+                1 -> tab.text = "Video"
+                2 -> tab.text = "Favourites"
+            }
+        }.attach()
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
+        // TODO
     }
 
     override fun subscribeUi() {
-        TODO("Not yet implemented")
+        // TODO
     }
 }
