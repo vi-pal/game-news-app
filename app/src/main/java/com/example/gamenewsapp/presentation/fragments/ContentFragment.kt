@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gamenewsapp.base.BaseFragment
+import com.example.gamenewsapp.data.News
 import com.example.gamenewsapp.data.NewsType
 import com.example.gamenewsapp.databinding.FragmentContentBinding
 import com.example.gamenewsapp.presentation.adapters.AdapterScrollListener
@@ -41,11 +42,12 @@ class ContentFragment(private val type: NewsType) : BaseFragment() {
             val listener = AdapterScrollListener(viewModel)
             addOnScrollListener(listener)
         }
-
+        mAdapterPager.registerAdapterDataObserver(binding.indicator.adapterDataObserver)
         binding.vpContainer.apply {
             adapter = mAdapterPager
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
+        binding.indicator.setViewPager(binding.vpContainer)
     }
 
     override fun initData() {
@@ -57,22 +59,32 @@ class ContentFragment(private val type: NewsType) : BaseFragment() {
             NewsType.STORIES -> {
                 viewModel.stories.observe(viewLifecycleOwner, Observer {
                     mAdapter.update(it.toMutableList())
-                    mAdapterPager.update(it)
+                    mAdapterPager.update(selectTop(it))
                 })
             }
             NewsType.VIDEO -> {
                 viewModel.videos.observe(viewLifecycleOwner, Observer {
                     mAdapter.update(it.toMutableList())
-                    mAdapterPager.update(it)
+                    mAdapterPager.update(selectTop(it))
                 })
             }
             NewsType.FAVOURITES -> {
                 viewModel.favourites.observe(viewLifecycleOwner, Observer {
                     mAdapter.update(it.toMutableList())
-                    mAdapterPager.update(it)
+                    mAdapterPager.update(selectTop(it))
                 })
             }
         }
+    }
+
+    private fun selectTop(list: List<News>): MutableList<News> {
+        val temp = mutableListOf<News>()
+        list.forEach {
+            if (it.top == 1) {
+                temp.add(it)
+            }
+        }
+        return temp
     }
 
 }

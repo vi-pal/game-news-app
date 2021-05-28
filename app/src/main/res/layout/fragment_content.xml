@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 app:layout_collapseMode="pin">
+
                 <com.example.gamenewsapp.utils.NestedScrollableHost
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -30,6 +31,12 @@
                         android:layout_centerInParent="true"/>
                 </com.example.gamenewsapp.utils.NestedScrollableHost>
             </RelativeLayout>
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal|bottom"
+                />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
