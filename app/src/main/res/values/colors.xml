@@ -9,7 +9,8 @@
     <color name="black_lighter">#1C1C1C</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#69A5FF</color>
-    <color name="grey">#A5A6A6</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="grey_light">#CDCDCD</color>
     <color name="black_transparent">#46000000</color>
     <color name="transparent">#00000000</color>
 

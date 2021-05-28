@@ -12,10 +12,10 @@ import com.example.gamenewsapp.presentation.viewmodels.NewsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
+class NewsFragment() : BaseFragment() {
 
     override val viewModel: NewsViewModel by sharedViewModel()
-    override lateinit var binding: FragmentNewsBinding
+    private lateinit var binding: FragmentNewsBinding
 
     private lateinit var adapter: FragmentPagerAdapter
     override fun onCreateView(
@@ -48,7 +48,7 @@ class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
     }
 
     override fun subscribeUi() {
-        viewModel.news.observe(viewLifecycleOwner, Observer {
+        viewModel.data.observe(viewLifecycleOwner, Observer {
 
         })
     }

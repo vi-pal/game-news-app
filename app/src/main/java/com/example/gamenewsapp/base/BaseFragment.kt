@@ -5,10 +5,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<B : ViewBinding> : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     protected abstract val viewModel: BaseViewModel
-    protected abstract var binding: B
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

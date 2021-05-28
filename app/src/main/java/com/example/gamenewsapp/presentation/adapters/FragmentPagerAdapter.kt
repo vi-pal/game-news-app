@@ -23,8 +23,4 @@ class FragmentPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycl
             else -> Fragment()
         }
     }
-
-    public fun updateData(data: List<News>, position: Int) {
-
-    }
 }

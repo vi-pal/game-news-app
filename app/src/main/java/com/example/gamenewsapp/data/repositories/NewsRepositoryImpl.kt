@@ -7,10 +7,10 @@ import com.example.gamenewsapp.network.api.MainApi
 import com.example.gamenewsapp.network.proceedResponse
 
 class NewsRepositoryImpl(private val api: MainApi) : NewsRepository {
-    override suspend fun requestNews(): Either<BaseError, List<News>?> {
+    override suspend fun requestNews(offset: Int): Either<BaseError, List<News>?> {
         return proceedResponse {
-            val response = api.requestNews()
-            Either.Success(response.data)
+            val response = api.requestNews(offset)
+            Either.Success(response)
         }
     }
 }

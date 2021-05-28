@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class News (
     val title: String,
-    val type: String,
+    val type: NewsType,
     @SerializedName("img")
-    val image: String,
+    val image: String?,
     @SerializedName("click_url")
     val clickUrl: String,
     val time: String,

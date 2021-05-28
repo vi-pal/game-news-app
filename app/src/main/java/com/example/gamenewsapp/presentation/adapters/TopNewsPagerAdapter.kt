@@ -1,14 +1,15 @@
 package com.example.gamenewsapp.presentation.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.gamenewsapp.data.News
 import com.example.gamenewsapp.databinding.ItemImageCardBinding
+import com.squareup.picasso.Picasso
 
-class TopNewsPagerAdapter(private val context: Context, private val topNews: List<News>): RecyclerView.Adapter<TopNewsPagerAdapter.ViewHolder>() {
+class TopNewsPagerAdapter(): RecyclerView.Adapter<TopNewsPagerAdapter.ViewHolder>() {
+
+    private var topNews: List<News> = listOf()
 
     inner class ViewHolder(val binding: ItemImageCardBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -16,19 +17,25 @@ class TopNewsPagerAdapter(private val context: Context, private val topNews: Lis
         parent: ViewGroup,
         viewType: Int
     ): TopNewsPagerAdapter.ViewHolder {
-        val binding = ItemImageCardBinding
-            .inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(ItemImageCardBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int = topNews.size
+
+    fun update(data: List<News>) {
+        topNews = data
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTitle.text = topNews[position].title
         holder.binding.tvLink.text = topNews[position].clickUrl
         holder.binding.tvTime.text = topNews[position].time
-        Glide.with(context)
+        Picasso.get()
             .load(topNews[position].image)
+            .fit()
+            .centerCrop()
             .into(holder.binding.ivBackground)
     }
 }
