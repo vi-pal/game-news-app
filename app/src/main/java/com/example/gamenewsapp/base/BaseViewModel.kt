@@ -18,19 +18,18 @@ abstract class BaseViewModel : ViewModel() {
         showPreloader: Boolean = false,
         doOnAsyncBlock: suspend CoroutineScope.() -> P
     ) {
+        setLoading(true)
         try {
-            if (showPreloader) {
-                doOnUI {
-                    setLoading(true)
-                }
+            doOnUI {
+
             }
             doCoroutineWork(doOnAsyncBlock, Dispatchers.IO) {
                 if (showPreloader) setLoading(false)
             }
         } catch (e: Exception) {
-            if (showPreloader) setLoading(false)
             Log.e("BaseViewModel", e.localizedMessage)
         }
+        setLoading(false)
     }
 
     fun setLoading(loading: Boolean) {

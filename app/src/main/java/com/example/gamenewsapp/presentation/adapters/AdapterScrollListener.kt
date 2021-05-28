@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 open class AdapterScrollListener(
-    val listener: OnLoadItemsListener
+    private val listener: OnLoadItemsListener
 ) : RecyclerView.OnScrollListener() {
 
     private var offset: Int = 1
@@ -15,7 +15,7 @@ open class AdapterScrollListener(
         super.onScrollStateChanged(recyclerView, newState)
         val firstVisibleItem =
             (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        if (isLastItemVisible(recyclerView) && !listener.isLoading.value!!) {
+        if (isLastItemVisible(recyclerView)) {
             offset++
             listener.onAdapterScrolled(offset)
         }
@@ -30,7 +30,6 @@ open class AdapterScrollListener(
     }
 
     interface OnLoadItemsListener {
-        val isLoading: LiveData<Boolean>
 
         fun onAdapterScrolled(offset: Int)
     }

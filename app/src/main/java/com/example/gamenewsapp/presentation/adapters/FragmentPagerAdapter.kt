@@ -5,9 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.gamenewsapp.data.News
-import com.example.gamenewsapp.presentation.fragments.FavouritesFragment
-import com.example.gamenewsapp.presentation.fragments.StoriesFragment
-import com.example.gamenewsapp.presentation.fragments.VideoFragment
+import com.example.gamenewsapp.data.NewsType
+import com.example.gamenewsapp.presentation.fragments.ContentFragment
 
 class FragmentPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, val data: List<News>): FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -17,9 +16,9 @@ class FragmentPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycl
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> StoriesFragment()
-            1 -> VideoFragment()
-            2 -> FavouritesFragment()
+            0 -> ContentFragment(NewsType.STORIES)
+            1 -> ContentFragment(NewsType.VIDEO)
+            2 -> ContentFragment(NewsType.FAVOURITES)
             else -> Fragment()
         }
     }
