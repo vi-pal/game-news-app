@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.gamenewsapp.base.BaseFragment
-import com.example.gamenewsapp.base.BaseViewModel
 import com.example.gamenewsapp.databinding.FragmentNewsBinding
-import com.example.gamenewsapp.presentation.adapters.NewsPagerAdapter
+import com.example.gamenewsapp.presentation.adapters.FragmentPagerAdapter
+import com.example.gamenewsapp.presentation.viewmodels.NewsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.android.ext.android.bind
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
 
-    override lateinit var viewModel: BaseViewModel
+    override val viewModel: NewsViewModel by sharedViewModel()
     override lateinit var binding: FragmentNewsBinding
 
+    private lateinit var adapter: FragmentPagerAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +30,8 @@ class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
         binding.vpContainerNews
         binding.tlNews
 
-        val adapter = NewsPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
+        adapter = FragmentPagerAdapter(requireActivity().supportFragmentManager, lifecycle, listOf())
+
         binding.vpContainerNews.adapter = adapter
 
         TabLayoutMediator(binding.tlNews, binding.vpContainerNews) { tab, position ->
@@ -45,6 +48,8 @@ class NewsFragment() : BaseFragment<FragmentNewsBinding>() {
     }
 
     override fun subscribeUi() {
-        // TODO
+        viewModel.news.observe(viewLifecycleOwner, Observer {
+
+        })
     }
 }
