@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_marginBottom="20dp"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:visibility="visible"
-        android:src="@drawable/game_news_img" />
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_image"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="Mercedes-Benz and Laureus broadening their worldwide involvement" />
-
-    <LinearLayout
-        android:id="@+id/ll_link"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="news"
+            type="com.example.gamenewsapp.data.News" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:visibility="visible"
+            app:setImageViewIfNotNull="@{news.image}"
+            tools:src="@drawable/game_news_img"
+            />
 
         <TextView
-            android:id="@+id/tv_link"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lines="1"
-            android:textColor="@color/blue"
+            android:layout_below="@+id/iv_image"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Emercedesbez.com" />
+            android:text="@{news.title}"
+            tools:text="Mercedes-Benz and Laureus broadening their worldwide involvement" />
 
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_link"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:lines="1"
-            android:textColor="@color/grey"
-            tools:text="2 hours ago" />
-    </LinearLayout>
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:text="@{news.clickUrl}"
+                tools:text="Emercedesbez.com" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:lines="1"
+                android:textColor="@color/grey"
+                android:text="@{news.time}"
+                tools:text="2 hours ago" />
+        </LinearLayout>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

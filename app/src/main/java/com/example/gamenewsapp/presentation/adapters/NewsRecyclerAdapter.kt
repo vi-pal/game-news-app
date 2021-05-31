@@ -29,16 +29,6 @@ class NewsRecyclerAdapter() : RecyclerView.Adapter<ViewHolder>() {
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (data[position].image != null) {
-            holder.binding.ivImage.visibility = View.VISIBLE
-            Picasso.get()
-                .load(data[position].image)
-                .fit()
-                .centerCrop()
-                .into(holder.binding.ivImage)
-        } else holder.binding.ivImage.visibility = View.GONE
-        holder.binding.tvLink.text = data[position].clickUrl
-        holder.binding.tvTitle.text = data[position].title
-        holder.binding.tvTime.text = data[position].time
+        holder.binding.news = data[position]
     }
 }
